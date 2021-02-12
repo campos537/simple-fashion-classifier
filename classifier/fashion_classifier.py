@@ -11,7 +11,7 @@ class FashionClassifier:
 
         self.net = cv2.dnn.readNetFromONNX(model_path)
 
-        self.net.setPreferableBackend(0)
+        self.net.setPreferableBackend(3)
         self.net.setPreferableTarget(0)
 
         self.scalefactor = scalefactor
@@ -21,12 +21,14 @@ class FashionClassifier:
         self.crop = crop
         self.ddepth = ddepth
 
+    # Convert the raw result to the string labels
     def process_output(self, out):
         out = out.flatten()
         classId = np.argmax(out)
         return labels[classId]
 
     def predict(self, img):
+        # Preprocess the image to the network needs
         blob = cv2.dnn.blobFromImage(
             img, self.scalefactor, self.size, self.mean, self.swapRB, self.crop, self.ddepth)
         self.net.setInput(blob)
