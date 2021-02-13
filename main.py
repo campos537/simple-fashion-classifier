@@ -5,7 +5,7 @@ from classifier.fashion_classifier import FashionClassifier
 
 
 def main(model_path, img_path):
-    fashion_model = FashionClassifier(model_path, 1.0, (32, 32), (), True)
+    fashion_model = FashionClassifier(model_path, 1.0, (32, 32), (), False)
 
     avg_time = 0.0
     if os.path.isdir(img_path):
@@ -18,6 +18,7 @@ def main(model_path, img_path):
             t1.start()
             print(img, " ", fashion_model.predict(image))
             t1.stop()
+            print(t1.getTimeMilli())
             total_time = total_time + t1.getTimeMilli()
         avg_time = total_time / folder_size
     else:
