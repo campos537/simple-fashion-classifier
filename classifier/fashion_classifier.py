@@ -8,14 +8,14 @@ labels = {0: "angle-boot", 1: "bag", 2: "coat", 3: "dress", 4: "pullover",
 
 class FashionClassifier:
 
-    def __init__(self, model_path, scalefactor=1.0, size=(), mean=(), swapRB=False, crop=False, ddepth=cv2.CV_32F):
+    def __init__(self, model_path, backend = 3, scalefactor=1.0, size=(), mean=(), swapRB=False, crop=False, ddepth=cv2.CV_32F):
 
         if os.path.isdir(model_path):
             self.net = cv2.dnn.readNetFromModelOptimizer(model_path+"/model.xml", model_path+"/model.bin")
         else:
             self.net = cv2.dnn.readNetFromONNX(model_path)
         
-        self.net.setPreferableBackend(2)
+        self.net.setPreferableBackend(backend)
         self.net.setPreferableTarget(0)
 
         self.scalefactor = scalefactor

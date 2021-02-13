@@ -19,9 +19,14 @@ To use this repository please follow the steps below:
 ```
 cd simple-fashion-classifier
 python3.7 -m pip install -r requirements
-python3.7 main.py path/to/model/file path/to/image_or_image_folder
+python3.7 main.py path/to/model/file path/to/image_or_image_folder 
 ```
 
+to run with InferenceEngine use:
+
+```
+python3.7 main.py path/to/model/file path/to/image_or_image_folder inference_engine
+```
 ## Extra
 
 To convert the FashionMnist csv files into images create a folder called data and use:

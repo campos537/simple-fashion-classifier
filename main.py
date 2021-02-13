@@ -4,8 +4,8 @@ import os
 from classifier.fashion_classifier import FashionClassifier
 
 
-def main(model_path, img_path):
-    fashion_model = FashionClassifier(model_path, 1.0, (32, 32), (), False)
+def main(model_path, img_path, backend):
+    fashion_model = FashionClassifier(model_path, backend, 1.0, (32, 32), (), False)
 
     avg_time = 0.0
     if os.path.isdir(img_path):
@@ -33,7 +33,13 @@ def main(model_path, img_path):
 
 
 if __name__ == '__main__':
-    if not len(sys.argv) == 3:
-        print("usage: python main.py path/to/model path/to/imageorfolder")
+    
+    backend = 3
+    if not len(sys.argv) >= 3:
+        print("usage: python main.py path/to/model path/to/imageorfolder opencv_or_inference_engine")
         exit(0)
-    main(sys.argv[1], sys.argv[2])
+    
+    if len(sys.argv) == 4 and sys.argv[3] == "inference_engine":
+        backend = 2
+        
+    main(sys.argv[1], sys.argv[2], backend)
